@@ -15,6 +15,11 @@ export default function List() {
     getCustomers()
   }, []);
 
+  const onDelete = async (id) => {
+    await MockApi.delete(id);
+    await getCustomers();
+  }
+
   return (
     <div>
       <Link to='/create/0'><Button>Create</Button></Link>
@@ -38,7 +43,7 @@ export default function List() {
                 <Table.Cell>{customer.iAgree ? 'Checked' : 'Unchecked'}</Table.Cell>
                 <Table.Cell><Link to={'/update/' + customer.id}><Button>Edit</Button></Link></Table.Cell>
                 <Table.Cell>
-                  <Button>Delete</Button>
+                  <Button onClick={() => onDelete(customer.id)}>Delete</Button>
                 </Table.Cell>
               </Table.Row>
             )
